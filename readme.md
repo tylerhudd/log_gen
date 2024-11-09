@@ -1,8 +1,10 @@
 # Log Generator
 
-This script automates the creation of log files based on templates and user input. It pulls configuration settings from a YAML file and allows flexible log generation through Windows batch and Linux shell scripts. 
+This script automates the creation of log files based on templates and user input. It pulls configuration settings from a YAML file and allows flexible log generation through Windows batch and Linux shell scripts.
 
-## Project Structure
+The default settings are for a [Dendron](https://www.dendron.so/) file system, but are pretty general to any log or note taking system in markdown.
+
+## File Structure
 
 - `log/config.yaml`: Configuration file with log parameters, template paths, and user settings.
 - `log/templates/`: Template files for markdown logs.
@@ -20,7 +22,7 @@ This script automates the creation of log files based on templates and user inpu
 
 ## Configuration (config.yaml)
 
-Create a `config.yaml` file in the same directory with the following structure:
+Create a `config.yaml` file in the `log` directory with the following contents:
 
 ```yaml
 user:
@@ -55,6 +57,8 @@ log_types:
    ```
 2. Follow the prompts to enter additional details such as date and other variables in the template.
 
+Additionally, you can add the directory containing this repository to you user or global environment variable, then enter the command without changing directories.
+
 ### 2. Linux
 
 1. Make the shell script executable:
@@ -71,42 +75,9 @@ log_types:
 The `log.py` script:
 - Loads configurations from `config.yaml`.
 - Prompts the user for input to dynamically fill in template variables.
-- Generates a unique ID and timestamp for each log entry.
+- Generates a unique ID and timestamp for each log entry for the frontmatter contents.
 - Formats and writes the log based on the specified template.
 - Opens the generated log in the user-specified text editor.
-
-## Functions Overview
-
-- **load_config**: Loads configuration parameters from `config.yaml`.
-- **get_log_params**: Retrieves log parameters for the specified type.
-- **prompt_for_date**: Asks for a date or uses today's date.
-- **prompt_for_vars**: Prompts for variables in the filename template.
-- **format_frontmatter**: Fills frontmatter fields for the log file.
-- **format_log_template**: Generates the log file's content.
-- **main**: Main function, orchestrates log generation and file creation.
-
-## Example Usage
-
-For a configuration in `config.yaml`:
-
-```yaml
-log_types:
-  sim:
-    title: "{project} {type} Simulation {date}"
-    file_name: "{project}-{type}-{date}.md"
-```
-
-Running:
-```bash
-./log.sh sim
-```
-
-will prompt for `project`, `type`, and `date`, generate the log file, and open it in the specified editor.
-
-## Error Handling
-
-- If the specified log type is not found in `config.yaml`, the script prints an error message.
-- If a log file already exists with the generated name, it will not overwrite and will display a warning.
 
 ## Notes
 
