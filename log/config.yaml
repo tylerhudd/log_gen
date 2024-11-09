@@ -1,0 +1,24 @@
+user:
+  name: "Your Name"
+  text_editor_path: "path_to_your_text_editor" # the path to the text editor you want opened automatically
+  log_proj: "path_to_your_log_project" # the directory you want the text editor opened to
+  log_dir: "path_to_your_log_archives" # the directory you want the log file saved to
+  frontmatter_template: "./templates/frontmatter_template.md"
+  dir_delimiter: '.' # '.' for dendron '/' for file system
+
+log_types: # add/remove/modify as needed
+  daily:
+    file_name: 'daily{delim}{date}.md'
+    template: ./templates/daily_template.md
+    title: 'daily log {date}'
+    desc: "A quick log of today's events."
+  meeting:
+    file_name: '{{project}}{{type}}{date}.md'
+    template: ./templates/meeting_template.md
+    title: '{project} meeting - {type} {date}'
+    desc: 'Some quick meeting notes.'
+  sim:
+    file_name: '{{project}}sim{delim}{{type}}{date}.md'
+    template: ./templates/sim_template.md
+    title: '{project} {type} simulation {date}'
+    desc: 'A quick simulation log to capture key settings and results.'
